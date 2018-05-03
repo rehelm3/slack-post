@@ -14,18 +14,25 @@
 </head>
 <body>
 
-  <form>
-    Workspace:<br>
-    <input id="workspace" type="text" name="firstname"><br>
-    Name:<br>
-    <input id="name" type="text" name="lastname">
-  </form>
+    <p>Add Group</p>
 
-  <button id="button">Say "Slack" to Slack</button>
+  <form>
+    Group/Channel Name:<br>
+    <input id="group-name-add" type="text" name="firstname"><br>
+  </form>
 
   <a href="https://slack.com/oauth/authorize?client_id=301088776592.354509848896&scope=incoming-webhook"><img alt="Add to Slack" 
     height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png"
     srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
+
+  <p>Poke Group/Channel</p>
+
+  <form>
+    Group/Channel Name:<br>
+    <input id="group-name-poke" type="text" name="firstname"><br>
+  </form>
+
+  <button id="button">Poke Group</button>
 
   <script>
 
