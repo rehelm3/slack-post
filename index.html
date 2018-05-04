@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <p>SlackPost Version 4.0</p>
+    <p>SlackPost Version 4.1</p>
     <p>Add Group/Channel</p>
 
   <form>
@@ -64,6 +64,9 @@
         var url_string = window.location.href; //window.location.href
         var url = new URL(url_string);
         var temp_code = url.searchParams.get("code");
+
+        console.log("The code: " + temp_code);
+        console.log("---------");
 
         //get the webhook (hooya!)
         //Slack API variables
