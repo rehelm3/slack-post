@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <p>SlackPost Version 4.9</p>
+    <p>SlackPost Version 4.10</p>
     <p>Add Group/Channel</p>
 
   <form>
@@ -53,6 +53,11 @@
     };
     firebase.initializeApp(config);
     var database = firebase.database;
+
+    //slack API variables
+    var testURL = "https://hooks.slack.com/services/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";
+    var clientID = "358300664629.358301327749";
+    var clientSecret = "da84e04076a906e05c9f3370d14e5406";
     
     //test if add button clicked on last load
     if(localStorage.getItem("new-channel-name") != "") {
@@ -67,15 +72,14 @@
 
         //get the webhook (hooya!)
         //Slack API variables
-        var clientID = "358300664629.358301327749";
-        var clientSecret = "da84e04076a906e05c9f3370d14e5406";
         var getCallURL = "https://slack.com/api/oauth.access?client_id=" + clientID + "&client_secret=" + clientSecret + "&code=" + temp_code; 
         $.ajax({
             type: "GET",
             url: getCallURL
         }).done(function(response) {
-            console.log(response);
-            console.log(response.incoming_webhook.url);
+            var webhook_url = response.incoming_webhook.url
+            console.log(webhook_url);
+            testURL = webhook_url;
         });
     }
     
@@ -102,16 +106,15 @@
         console.log("Hello");
 
         if($("#group-name-poke").val() == "") {
-            var queryURL = "https://hooks.slack.com/services/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";
 
-        $.ajax({
-            data: 'payload=' + JSON.stringify({
-            "text": "Poke!"
-            }),
-            processData: false,
-            type: "POST",
-            url: queryURL
-        });
+            $.ajax({
+                data: 'payload=' + JSON.stringify({
+                    "text": "Poke!"
+                }),
+                processData: false,
+                type: "POST",
+                url: testURL
+            });
       }
       else {
         $.ajax({
