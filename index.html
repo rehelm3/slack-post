@@ -21,44 +21,105 @@
     <input id="group-name-add" type="text" name="firstname"><br>
   </form>
 
-  <a href="https://slack.com/oauth/authorize?client_id=301088776592.354509848896&scope=incoming-webhook"><img alt="Add to Slack" 
-    height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png"
-    srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
+  <br>
 
-  <p>Poke Group/Channel</p>
+  <a href="https://slack.com/oauth/authorize?client_id=358300664629.358301327749&scope=incoming-webhook">
+    <img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png"
+     srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x,
+      https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
+
+    <br>
+    <br>
+    <p>Poke Group/Channel</p>
 
   <form>
     Group/Channel Name:<br>
     <input id="group-name-poke" type="text" name="firstname"><br>
   </form>
 
-  <button id="button">Poke Group</button>
+  <button id="poke-button">Poke Group</button>
 
+  <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
   <script>
 
   // JavaScript function that wraps everything
   $(document).ready(function() {
+    
+    //test if add button clicked on last load
+    if(localStorage.getItem("add-button-clicked") == "true") {
+        localStorage.setItem("add-button-clicked", "false");
+        $.ajax({
+            type: "GET",
+            url: "https://slack.com/oauth/code"
+        }).done(function(response) {
+            console.log("Got response.");
+        });
+    }
 
-    $("#button").on("click", function() {
+    var config = {
+        apiKey: "AIzaSyBdja7i8EvZiPTIU7jJmCAWCCjQGnsKDlY",
+        authDomain: "slackpost-2c01e.firebaseapp.com",
+        databaseURL: "https://slackpost-2c01e.firebaseio.com",
+        projectId: "slackpost-2c01e",
+        storageBucket: "slackpost-2c01e.appspot.com",
+        messagingSenderId: "390959225136"
+    };
+    firebase.initializeApp(config);
 
-    message = $("#workspace").val() + "\n" + $("#name").val();
-      var queryURL = "https://hooks.slack.com/services/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";
+    var database = firebase.database;
 
-      $.ajax({
-        type: "GET",
-        url: "https://slack.com/api/oauth.token"
-      }).done(function(response) {
-        console.log(response);
-      });
+    //Slack API variables
+    var clientID = 358300664629.358301327749;
+    var clientSecret = da84e04076a906e05c9f3370d14e5406;
+    var code;
+    
+    $("#add-button").on("click", function() {
+        console.log("Added!");
+        localStorage.setItem("add-button-clicked", "true");
+        $.ajax({
+            type: "GET",
+            url: "https://slack.com/api/oauth.token"
+        }).done(function(response) {
+            console.log("Got response.");
+        });
+    });
+    
 
-      $.ajax({
-        data: 'payload=' + JSON.stringify({
-          "text": message
-        }),
-        processData: false,
-        type: "POST",
-        url: queryURL
-      });
+
+
+
+
+
+
+
+
+    $("#poke-button").on("click", function() {
+        
+        console.log("HEllo");
+
+        if($("#group-name-poke").val() == "") {
+            var queryURL = "https://hooks.slack.com/services/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";
+
+        $.ajax({
+            data: 'payload=' + JSON.stringify({
+            "text": "Poke!"
+            }),
+            processData: false,
+            type: "POST",
+            url: queryURL
+        });
+      }
+      else {
+        $.ajax({
+            type: "GET",
+            url: "https://slack.com/api/oauth.token"
+        }).done(function(response) {
+            console.log(response);
+        });
+      }
+
+
+
     });
 
   })
