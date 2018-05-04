@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <p>SlackPost Version 4.6</p>
+    <p>SlackPost Version 4.7</p>
     <p>Add Group/Channel</p>
 
   <form>
@@ -63,10 +63,10 @@
         //store slack code in code variable
         var url_string = window.location.href; //window.location.href
         var url = new URL(url_string);
-        // var split_code = url.searchParams.get("code").split(".");
-        // var temp_code = split_code[2];
+        var split_code = url.searchParams.get("code").split(".");
+        var temp_code = split_code[2];
 
-        var temp_code = url.searchParams.get("code"); //test
+        //var temp_code = url.searchParams.get("code"); //test
 
         console.log("The code: " + temp_code);
         console.log("---------");
