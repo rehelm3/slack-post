@@ -94,6 +94,16 @@
             $("#add-button").append("<a href='https://slack.com/oauth/authorize?client_id=358300664629.358301327749&scope=incoming-webhook'><img alt='Add to Slack' height='40' width='139' src='https://platform.slack-edge.com/img/add_to_slack.png'srcset='https://platform.slack-edge.com/img/add_to_slack.png 1x,https://platform.slack-edge.com/img/add_to_slack@2x.png 2x' /></a>");
         }
     });
+
+    database.ref().on("child_added", function(snapshot) {
+      // Log everything that's coming out of snapshot
+      console.log(snapshot.val());
+      console.log(snapshot.val().connection);
+
+    // Handle the errors
+    }, function(errorObject) {
+      console.log("Errors handled: " + errorObject.code);
+    });
     
 
 
