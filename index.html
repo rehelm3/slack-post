@@ -52,7 +52,7 @@
         messagingSenderId: "390959225136"
     };
     firebase.initializeApp(config);
-    var database = firebase.database;
+    var database = firebase.database();
 
     //slack API variables
     var testURL = "https://hooks.slack.com/services/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";
@@ -80,11 +80,15 @@
             var webhook_url = response.incoming_webhook.url
             console.log(webhook_url);
             testURL = webhook_url;
+            database.ref().push({
+                connection: new_channel_name,
+                webhook: webhook_url
+            });
         });
     }
     
     $("#add-button").on("click", function() {
-        var name_input = $("#group-name-add").val()
+        var name_input = $("#group-name-add").val();
         if(name_input != "") {
             localStorage.setItem("new-channel-name", name_input);
             $("#add-button").text("");
