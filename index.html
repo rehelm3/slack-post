@@ -75,10 +75,10 @@
         var clientSecret = "da84e04076a906e05c9f3370d14e5406";
         $.ajax({
             type: "GET",
-            url: "https://slack.com/api/oauth.access",
-            client_id: clientID,
-            client_secret: clientSecret,
-            code: temp_code
+            url: "https://slack.com/api/oauth.access"
+            // client_id: clientID,
+            // client_secret: clientSecret,
+            // code: temp_code
         }).done(function(response) {
             console.log("Got response.");
             console.log(response);
