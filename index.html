@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <p>SlackPost Version 4.4</p>
+    <p>SlackPost Version 4.5</p>
     <p>Add Group/Channel</p>
 
   <form>
@@ -63,8 +63,10 @@
         //store slack code in code variable
         var url_string = window.location.href; //window.location.href
         var url = new URL(url_string);
-        var split_code = url.searchParams.get("code").split(".");
-        var temp_code = split_code[2];
+        // var split_code = url.searchParams.get("code").split(".");
+        // var temp_code = split_code[2];
+
+        var temp_code = url.searchParams.get("code"); //test
 
         console.log("The code: " + temp_code);
         console.log("---------");
@@ -73,9 +75,10 @@
         //Slack API variables
         var clientID = "358300664629.358301327749";
         var clientSecret = "da84e04076a906e05c9f3370d14e5406";
+        var getCallURL = "https://slack.com/api/oauth.access?client_id=" + clientID + "&client_secret=" + clientSecret + "&code=" 
         $.ajax({
             type: "GET",
-            url: "https://slack.com/api/oauth.access"
+            url: getCallURL
             // client_id: clientID,
             // client_secret: clientSecret,
             // code: temp_code
