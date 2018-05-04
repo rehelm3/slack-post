@@ -14,6 +14,7 @@
 </head>
 <body>
 
+    <p>SlackPost Version 3.0</p>
     <p>Add Group</p>
 
   <form>
@@ -44,9 +45,12 @@
 
   // JavaScript function that wraps everything
   $(document).ready(function() {
+
+    localStorage.setItem("test", "Hello");
     
     //test if add button clicked on last load
     if(localStorage.getItem("add-button-clicked") == "true") {
+        console.log("add button clicked was true");
         localStorage.setItem("add-button-clicked", "false");
         $.ajax({
             type: "GET",
