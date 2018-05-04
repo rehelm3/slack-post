@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <p>SlackPost Version 3.3</p>
+    <p>SlackPost Version 4.0</p>
     <p>Add Group/Channel</p>
 
   <form>
@@ -63,23 +63,23 @@
         //store slack code in code variable
         var url_string = window.location.href; //window.location.href
         var url = new URL(url_string);
-        var code = url.searchParams.get("code");
+        var temp_code = url.searchParams.get("code");
 
-        console.log(new_channel_name);
-        console.log(code);
-
-
+        //get the webhook (hooya!)
+        //Slack API variables
+        var clientID = "358300664629.358301327749";
+        var clientSecret = "da84e04076a906e05c9f3370d14e5406";
         $.ajax({
             type: "GET",
-            url: "https://slack.com/oauth/code"
+            url: "https://slack.com/api/oauth.access",
+            client_id: clientID,
+            client_secret: clientSecret,
+            code: temp_code
         }).done(function(response) {
             console.log("Got response.");
+            console.log(response);
         });
     }
-
-    //Slack API variables
-    var clientID = "358300664629.358301327749";
-    var clientSecret = "da84e04076a906e05c9f3370d14e5406";
     
     $("#add-button").on("click", function() {
         var name_input = $("#group-name-add").val()
