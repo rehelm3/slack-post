@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <p>SlackPost Version 5.8</p>
+    <p>SlackPost Version 5.8.1</p>
     <p>Add Group/Channel</p>
 
   <form>
@@ -125,7 +125,7 @@
             });
       }
       else {
-          if($("#group-name-poke").val() == snapshot.val().connection) {
+          if($("#group-name-poke").val() == data_snapshot.val().connection) {
               console.log("A matching channel was found!");
             $.ajax({
                 data: 'payload=' + JSON.stringify({
@@ -133,7 +133,7 @@
                 }),
                 processData: false,
                 type: "POST",
-                url: snapshot.val().webhook
+                url: data_snapshot.val().webhook
             });
           }
       }
