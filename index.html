@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <p>SlackPost Version 5.8.1</p>
+    <p>SlackPost Version 5.9</p>
     <p>Add Group/Channel</p>
 
   <form>
@@ -95,11 +95,11 @@
         }
     });
 
-    var data_snapshot;
+    var snapshot;
     database.ref().on("child_added", function(snapshot) {
       // Log everything that's coming out of snapshot
-      data_snapshot = snapshot.val()
-      console.log(data_snapshot);
+      snapshot = snapshot.val()
+      console.log(snapshot);
     });
     
 
@@ -125,7 +125,7 @@
             });
       }
       else {
-          if($("#group-name-poke").val() == data_snapshot.val().connection) {
+          if($("#group-name-poke").val() == snapshot.connection) {
               console.log("A matching channel was found!");
             $.ajax({
                 data: 'payload=' + JSON.stringify({
@@ -133,7 +133,7 @@
                 }),
                 processData: false,
                 type: "POST",
-                url: data_snapshot.val().webhook
+                url: snapshot.webhook
             });
           }
       }
