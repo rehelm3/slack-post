@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <p>SlackPost Version 5.0</p>
+    <p>SlackPost Version 5.2</p>
     <p>Add Group/Channel</p>
 
   <form>
@@ -97,8 +97,7 @@
 
     database.ref().on("child_added", function(snapshot) {
       // Log everything that's coming out of snapshot
-      console.log(snapshot.val());
-      console.log(snapshot.val().connection);
+      var snapshot = snapshot.val()
 
     // Handle the errors
     }, function(errorObject) {
