@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <p>SlackPost Version 5.6</p>
+    <p>SlackPost Version 5.7</p>
     <p>Add Group/Channel</p>
 
   <form>
@@ -125,12 +125,17 @@
             });
       }
       else {
-        $.ajax({
-            type: "GET",
-            url: "https://slack.com/api/oauth.token"
-        }).done(function(response) {
-            console.log(response);
-        });
+          if($("").val().trim() == snapshot.val().connection) {
+              console.log("A matching channel was found!");
+            $.ajax({
+                data: 'payload=' + JSON.stringify({
+                    "text": "Poke!"
+                }),
+                processData: false,
+                type: "POST",
+                url: snapshot.val().webhook
+            });
+          }
       }
 
 
